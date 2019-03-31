@@ -21,20 +21,25 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
  * Handler implementation for the echo server.
+ * echo服务器的处理程序实现。
  */
 @Sharable
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
+
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        System.out.println(msg);
         ctx.write(msg);
     }
-
+    //channel Read 完成
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) {
         ctx.flush();
     }
 
+    //异常抓取
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         // Close the connection when an exception is raised.

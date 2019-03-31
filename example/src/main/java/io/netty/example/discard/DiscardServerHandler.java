@@ -20,6 +20,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
  * Handles a server-side channel.
+ * 处理服务器端通道。
  */
 public class DiscardServerHandler extends SimpleChannelInboundHandler<Object> {
 

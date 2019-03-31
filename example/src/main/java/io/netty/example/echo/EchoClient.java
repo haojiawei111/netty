@@ -45,13 +45,12 @@ public final class EchoClient {
         // Configure SSL.git
         final SslContext sslCtx;
         if (SSL) {
-            sslCtx = SslContextBuilder.forClient()
-                .trustManager(InsecureTrustManagerFactory.INSTANCE).build();
+            sslCtx = SslContextBuilder.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE).build();
         } else {
             sslCtx = null;
         }
 
-        // Configure the client.
+        // 配置客户端。
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
@@ -70,13 +69,13 @@ public final class EchoClient {
                  }
              });
 
-            // Start the client.
+            // 启动客户端。
             ChannelFuture f = b.connect(HOST, PORT).sync();
 
-            // Wait until the connection is closed.
+            // Wait until the connection is closed.等到连接关闭。
             f.channel().closeFuture().sync();
         } finally {
-            // Shut down the event loop to terminate all threads.
+            // Shut down the event loop to terminate all threads.关闭事件循环以终止所有线程。
             group.shutdownGracefully();
         }
     }

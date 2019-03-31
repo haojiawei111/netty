@@ -32,6 +32,7 @@ import io.netty.handler.ssl.util.SelfSignedCertificate;
 
 /**
  * Echoes back any received data from a client.
+ * 回显客户端收到的任何数据。
  */
 public final class EchoServer {
 
@@ -48,7 +49,7 @@ public final class EchoServer {
             sslCtx = null;
         }
 
-        // Configure the server.
+        // Configure the server.配置服务器。
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         final EchoServerHandler serverHandler = new EchoServerHandler();
@@ -70,13 +71,14 @@ public final class EchoServer {
                  }
              });
 
-            // Start the server.
-            ChannelFuture f = b.bind(PORT).sync();
+            // 开启这个服务
+            ChannelFuture f = b.bind(PORT).sync(); //同步
 
-            // Wait until the server socket is closed.
+            // Wait until the server socket is closed.等到服务器套接字关闭。
             f.channel().closeFuture().sync();
         } finally {
             // Shut down all event loops to terminate all threads.
+            // 关闭所有事件循环以终止所有线程。
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }

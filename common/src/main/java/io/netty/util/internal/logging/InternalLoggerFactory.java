@@ -23,13 +23,17 @@ package io.netty.util.internal.logging;
  * is not available, {@link Log4JLoggerFactory} is used.  If Log4J is not available,
  * {@link JdkLoggerFactory} is used.  You can change it to your preferred
  * logging framework before other Netty classes are loaded:
+ * 创建{@link InternalLogger}或更改默认工厂*实现。这个工厂允许您选择Netty应该使用的日志框架。默认工厂是{@link Slf4JLoggerFactory}。
+ * 如果SLF4J *不可用，则使用{@link Log4JLoggerFactory}。如果Log4J不可用，则使用* {@link JdkLoggerFactory}。在加载其他Netty类之前，您可以将其更改为首选*日志框架：
  * <pre>
  * {@link InternalLoggerFactory}.setDefaultFactory({@link Log4JLoggerFactory}.INSTANCE);
+ * {@link InternalLoggerFactory} .setDefaultFactory（{@ link Log4JLoggerFactory} .INSTANCE);
  * </pre>
  * Please note that the new default factory is effective only for the classes
  * which were loaded after the default factory is changed.  Therefore,
  * {@link #setDefaultFactory(InternalLoggerFactory)} should be called as early
  * as possible and shouldn't be called more than once.
+ * 请注意，新的默认工厂仅对更改默认工厂后加载的类*有效。因此，* {@link #setDefaultFactory（InternalLoggerFactory）}应尽可能早地调用，不应多次调用。
  */
 public abstract class InternalLoggerFactory {
 
@@ -59,8 +63,8 @@ public abstract class InternalLoggerFactory {
     }
 
     /**
-     * Returns the default factory.  The initial default factory is
-     * {@link JdkLoggerFactory}.
+     * Returns the default factory.  The initial default factory is {@link JdkLoggerFactory}.
+     * 返回默认工厂。最初的默认工厂是{@link JdkLoggerFactory}.
      */
     public static InternalLoggerFactory getDefaultFactory() {
         if (defaultFactory == null) {
@@ -70,7 +74,7 @@ public abstract class InternalLoggerFactory {
     }
 
     /**
-     * Changes the default factory.
+     * Changes the default factory.更改默认工厂。
      */
     public static void setDefaultFactory(InternalLoggerFactory defaultFactory) {
         if (defaultFactory == null) {
@@ -80,21 +84,21 @@ public abstract class InternalLoggerFactory {
     }
 
     /**
-     * Creates a new logger instance with the name of the specified class.
+     * 使用指定类的名称创建新的记录器实例。
      */
     public static InternalLogger getInstance(Class<?> clazz) {
         return getInstance(clazz.getName());
     }
 
     /**
-     * Creates a new logger instance with the specified name.
+     * 创建具有指定名称的新记录器实例。
      */
     public static InternalLogger getInstance(String name) {
         return getDefaultFactory().newInstance(name);
     }
 
     /**
-     * Creates a new logger instance with the specified name.
+     * 创建具有指定名称的新记录器实例。
      */
     protected abstract InternalLogger newInstance(String name);
 

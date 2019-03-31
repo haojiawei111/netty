@@ -19,6 +19,7 @@ import io.netty.util.internal.logging.InternalLogLevel;
 
 /**
  * Maps the regular {@link LogLevel}s with the {@link InternalLogLevel} ones.
+ * 使用{@link InternalLogLevel}映射常规{@link LogLevel}。
  */
 public enum LogLevel {
     TRACE(InternalLogLevel.TRACE),

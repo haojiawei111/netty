@@ -31,8 +31,12 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
     /**
      * Creates a client-side handler.
+     * 创建客户端处理程序。
      */
     public EchoClientHandler() {
+
+        System.out.println(Unpooled.buffer(EchoClient.SIZE).capacity());
+
         firstMessage = Unpooled.buffer(EchoClient.SIZE);
         for (int i = 0; i < firstMessage.capacity(); i ++) {
             firstMessage.writeByte((byte) i);
@@ -46,14 +50,16 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        System.out.println(msg);
         ctx.write(msg);
-    }
 
+    }
+    //channel Read 完成
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) {
        ctx.flush();
     }
-
+    //异常抓取
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         // Close the connection when an exception is raised.

@@ -29,7 +29,7 @@ public class FileServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        ctx.writeAndFlush("HELLO: Type the path of the file to retrieve.\n");
+        ctx.writeAndFlush("HELLO: Type the path of the file to retrieve.输入要检索的文件的路径\n");
     }
 
     @Override

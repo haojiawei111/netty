@@ -35,11 +35,14 @@ import static io.netty.util.internal.StringUtil.NEWLINE;
 /**
  * A {@link ChannelHandler} that logs all events using a logging framework.
  * By default, all events are logged at <tt>DEBUG</tt> level.
+ * 使用日志框架记录所有事件的{@link ChannelHandler}。 *默认情况下，所有事件都记录在<tt> DEBUG </ tt>级别。
  */
 @Sharable
 @SuppressWarnings({ "StringConcatenationInsideStringBufferAppend", "StringBufferReplaceableByString" })
+//ChannelDuplexHandler，其中核心的两个方法是channelRead、write。前者用于接收服务器发来的数据，后者用于向服务器发送指令。
 public class LoggingHandler extends ChannelDuplexHandler {
 
+    // 默认级别为DEBUG
     private static final LogLevel DEFAULT_LEVEL = LogLevel.DEBUG;
 
     protected final InternalLogger logger;
@@ -50,6 +53,7 @@ public class LoggingHandler extends ChannelDuplexHandler {
     /**
      * Creates a new instance whose logger name is the fully qualified class
      * name of the instance with hex dump enabled.
+     * 创建一个新实例，其记录器名称是启用了十六进制转储的实例的完全限定类名称。
      */
     public LoggingHandler() {
         this(DEFAULT_LEVEL);
@@ -58,6 +62,7 @@ public class LoggingHandler extends ChannelDuplexHandler {
     /**
      * Creates a new instance whose logger name is the fully qualified class
      * name of the instance.
+     * 创建一个新实例，其记录器名称是实例的完全限定类名称。
      *
      * @param level the log level
      */
@@ -130,11 +135,13 @@ public class LoggingHandler extends ChannelDuplexHandler {
 
     /**
      * Returns the {@link LogLevel} that this handler uses to log
+     * 返回此处理程序用于记录的{@link LogLevel}
      */
     public LogLevel level() {
         return level;
     }
 
+    // channel注册
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         if (logger.isEnabled(internalLevel)) {
@@ -143,6 +150,7 @@ public class LoggingHandler extends ChannelDuplexHandler {
         ctx.fireChannelRegistered();
     }
 
+    //channel未注册
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
         if (logger.isEnabled(internalLevel)) {
@@ -150,7 +158,7 @@ public class LoggingHandler extends ChannelDuplexHandler {
         }
         ctx.fireChannelUnregistered();
     }
-
+    //channel有效
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         if (logger.isEnabled(internalLevel)) {
@@ -158,7 +166,7 @@ public class LoggingHandler extends ChannelDuplexHandler {
         }
         ctx.fireChannelActive();
     }
-
+    // channel无效
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         if (logger.isEnabled(internalLevel)) {
@@ -166,7 +174,7 @@ public class LoggingHandler extends ChannelDuplexHandler {
         }
         ctx.fireChannelInactive();
     }
-
+    //异常抓到
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         if (logger.isEnabled(internalLevel)) {
@@ -192,9 +200,8 @@ public class LoggingHandler extends ChannelDuplexHandler {
     }
 
     @Override
-    public void connect(
-            ChannelHandlerContext ctx,
-            SocketAddress remoteAddress, SocketAddress localAddress, ChannelPromise promise) throws Exception {
+    public void connect(ChannelHandlerContext ctx, SocketAddress remoteAddress,
+                        SocketAddress localAddress, ChannelPromise promise) throws Exception {
         if (logger.isEnabled(internalLevel)) {
             logger.log(internalLevel, format(ctx, "CONNECT", remoteAddress, localAddress));
         }
@@ -232,6 +239,7 @@ public class LoggingHandler extends ChannelDuplexHandler {
         }
         ctx.fireChannelReadComplete();
     }
+/************************************************************************************************************/
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -248,6 +256,8 @@ public class LoggingHandler extends ChannelDuplexHandler {
         }
         ctx.write(msg, promise);
     }
+
+/************************************************************************************************************/
 
     @Override
     public void channelWritabilityChanged(ChannelHandlerContext ctx) throws Exception {

@@ -35,6 +35,7 @@ import java.io.InputStreamReader;
 
 /**
  * Simple memcache client that demonstrates get and set commands against a memcache server.
+ * 简单的memcache客户端，演示针对memcache服务器的get和set命令。
  */
 public final class MemcacheClient {
 

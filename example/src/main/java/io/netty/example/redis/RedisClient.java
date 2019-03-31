@@ -35,6 +35,7 @@ import java.io.InputStreamReader;
 
 /**
  * Simple Redis client that demonstrates Redis commands against a Redis server.
+ * 简单的Redis客户端，它针对Redis服务器演示Redis命令。
  */
 public class RedisClient {
     private static final String HOST = System.getProperty("host", "127.0.0.1");

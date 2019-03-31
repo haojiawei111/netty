@@ -37,6 +37,7 @@ import io.netty.util.CharsetUtil;
 
 /**
  * Server that accept the path of a file an echo back its content.
+ * 接受文件路径的服务器回显其内容。
  */
 public final class FileServer {
 

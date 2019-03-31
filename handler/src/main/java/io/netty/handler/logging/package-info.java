@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 The Netty Project
+ * Copyright 2014 The Netty Project
  *
  * The Netty Project licenses this file to you under the Apache License,
  * version 2.0 (the "License"); you may not use this file except in compliance
@@ -15,6 +15,6 @@
  */
 
 /**
- * Logs the I/O events for debugging purpose.
+ * Logs the I/O events for debugging purpose.记录I / O事件以进行调试。
  */
 package io.netty.handler.logging;
